@@ -171,11 +171,11 @@ export default function HomeClient() {
                             >
                                 <Image
                                     src={src}
-                                    alt={`Brigo App Mockup ${index + 1}`}
+                                    alt={`Brigo AI Study App Mockup - ${index === 0 ? 'Exam Prediction Interface' : 'Study Podcast Feature'}`}
                                     width={1000}
                                     height={2023}
                                     className="w-full h-auto drop-shadow-2xl"
-                                    priority={index === 0}
+                                    priority={true}
                                 />
                             </div>
                         ))}

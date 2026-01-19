@@ -1,0 +1,21 @@
+{
+    "name": "Brigo - AI-Powered Study Companion",
+    "short_name": "Brigo",
+    "description": "Stop struggling. Start studying smarter. Brigo transforms your notes into interactive study tools.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFFCF4",
+    "theme_color": "#FF4D00",
+    "icons": [
+        {
+            "src": "/app-icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/app-icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
