@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# brigo.app - Landing Page & Blog
 
-## Getting Started
+This is the official landing page and editorial blog for **brigo**, a platform dedicated to digital wellness and breaking free from endless scrolling.
 
-First, run the development server:
+## 🚀 Deployment on Vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To deploy this project on Vercel using the **"Import from GitHub"** feature, follow these steps:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You **must** configure the following environment variables in your Vercel project settings:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Name | Description |
+| :--- | :--- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anonymous/public key. |
+| `NEXT_PUBLIC_ADMIN_PASSWORD` | The password used to access the `/admin` dashboard. |
 
-## Learn More
+### 2. Vercel Configuration
 
-To learn more about Next.js, take a look at the following resources:
+Most settings are automatically detected. However, ensure:
+- **Framework Preset**: Next.js
+- **Root Directory**: `./` (if your project is in the root of the repo)
+- **Install Command**: `npm install`
+- **Build Command**: `next build`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Supabase Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ensure your Supabase project remains accessible. If you use Supabase Storage for images, make sure the `blog-images` bucket is **Public**.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [GSAP](https://gsap.com/) (GreenSock)
+- **Database/Storage**: [Supabase](https://supabase.com/)
+- **Editor**: [Tiptap](https://tiptap.dev/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+## 📂 Project Structure
+
+- `app/`: Next.js pages and layouts (Landing, Blog, Admin, etc.)
+- `components/`: Reusable UI components.
+- `lib/`: Utility functions and Supabase client.
+- `public/`: Static assets (images, icons).
+
+## 🧑‍💻 Local Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Create a `.env.local` file with the variables listed above.
+3. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+Built with ❤️ by the brigo team.
