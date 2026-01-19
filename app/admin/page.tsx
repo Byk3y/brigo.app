@@ -23,7 +23,9 @@ function AdminPageContent() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isAuthenticating, setIsAuthenticating] = useState(false);
     const [editingPost, setEditingPost] = useState<Post | null>(null);
     const [originalPost, setOriginalPost] = useState<Post | null>(null);
     const [isSaving, setIsSaving] = useState(false);
@@ -61,23 +63,45 @@ function AdminPageContent() {
 
     // Check for persisted login on mount
     useEffect(() => {
-        const savedLogin = localStorage.getItem('brigo_admin_session');
-        if (savedLogin === 'true') {
-            setIsLoggedIn(true);
-        }
-        setIsCheckingAuth(false);
+        const checkSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            setIsLoggedIn(!!session);
+            setIsCheckingAuth(false);
+        };
+
+        checkSession();
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setIsLoggedIn(!!session);
+            if (!session) {
+                // Clear state on logout
+                setPosts([]);
+                setImages([]);
+            }
+        });
+
+        return () => subscription.unsubscribe();
     }, []);
 
-    // Simple password check using env var
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'brigo2026'; // Fallback for demo
-        if (password === adminPass) {
-            setIsLoggedIn(true);
-            localStorage.setItem('brigo_admin_session', 'true');
-            toast.success('Welcome back, Francis!');
-        } else {
-            toast.error('Incorrect password');
+        setIsAuthenticating(true);
+
+        try {
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+
+            if (error) {
+                toast.error(error.message);
+            } else {
+                toast.success('Welcome back!');
+            }
+        } catch (err) {
+            toast.error('An unexpected error occurred');
+        } finally {
+            setIsAuthenticating(false);
         }
     };
 
@@ -242,14 +266,33 @@ function AdminPageContent() {
                     <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">Admin Access</h1>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <input
-                            type="password"
-                            placeholder="Admin Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            type="email"
+                            placeholder="Admin Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
                             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#FF4D00] outline-none transition-all"
                         />
-                        <button className="w-full bg-[#FF4D00] text-white py-3 rounded-xl font-bold text-lg hover:scale-[1.02] transition-transform shadow-lg shadow-[#FF4D00]/20">
-                            Login
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#FF4D00] outline-none transition-all"
+                        />
+                        <button
+                            disabled={isAuthenticating}
+                            className="w-full bg-[#FF4D00] text-white py-3 rounded-xl font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-[#FF4D00]/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        >
+                            {isAuthenticating ? (
+                                <>
+                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                    Authenticating...
+                                </>
+                            ) : (
+                                'Login'
+                            )}
                         </button>
                     </form>
                 </div>
@@ -272,9 +315,8 @@ function AdminPageContent() {
 
                         {/* Mobile Sign Out */}
                         <button
-                            onClick={() => {
-                                setIsLoggedIn(false);
-                                localStorage.removeItem('brigo_admin_session');
+                            onClick={async () => {
+                                await supabase.auth.signOut();
                             }}
                             className="md:hidden p-2 text-gray-400 hover:text-red-500 transition-colors"
                         >
@@ -304,11 +346,10 @@ function AdminPageContent() {
                         ))}
                     </div>
 
-                    {/* Desktop Sign Out */}
+                    {/* Desktop Sign Out / Mobile Sign Out fix */}
                     <button
-                        onClick={() => {
-                            setIsLoggedIn(false);
-                            localStorage.removeItem('brigo_admin_session');
+                        onClick={async () => {
+                            await supabase.auth.signOut();
                         }}
                         className="hidden md:flex items-center gap-2 px-4 py-2 text-gray-400 hover:text-red-500 font-bold text-sm transition-colors"
                     >
