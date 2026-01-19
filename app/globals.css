@@ -1,26 +1,114 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: var(--font-quicksand), sans-serif;
+  --font-quicksand: var(--font-quicksand);
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFCF4;
+  --foreground: #111827;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: #FFFCF4;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-quicksand), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Specs */
+.hero-title {
+  font-family: var(--font-quicksand), sans-serif;
+  font-size: clamp(40px, 10vw, 84px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+}
+
+.section-label {
+  font-family: var(--font-quicksand), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9CA3AF;
+}
+
+.body-large {
+  font-family: var(--font-quicksand), sans-serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: #4B5563;
+}
+
+.body-small {
+  font-family: var(--font-quicksand), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #9CA3AF;
+}
+
+/* Card Specs */
+.feature-card {
+  width: 100%;
+  min-height: 400px;
+  padding: 48px;
+  border-radius: 24px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+}
+
+.feature-card-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #9CA3AF;
+  margin-bottom: 24px;
+}
+
+.feature-card-title {
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.feature-card-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #6B7280;
+}
+
+.font-quicksand {
+  font-family: var(--font-quicksand), sans-serif;
+}
+
+.heading-large {
+  font-family: var(--font-quicksand), sans-serif;
+  font-size: clamp(32px, 8vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Utilities */
+.clip-text-image {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
