@@ -73,7 +73,7 @@ export default function FeaturesSection() {
                         number="02 LEARN"
                         title="Study Podcasts"
                         description="Turn any material into audio. Listen while you walk, gym or commute."
-                        image="/features/podcasts.png"
+                        image="/features/podcasts.webp"
                         variant="dark"
                     />
 

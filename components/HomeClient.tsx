@@ -11,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 
 export default function HomeClient() {
     const [activeMockup, setActiveMockup] = useState(0);
-    const mockups = ["/app-mockup.png", "/app-mockup-2.png"];
+    const mockups = ["/app-mockup.webp", "/app-mockup-2.webp"];
     const peekingRightRef = useRef<HTMLDivElement>(null);
     const peekingLeftRef = useRef<HTMLDivElement>(null);
 
@@ -72,7 +72,7 @@ export default function HomeClient() {
             {/* Header */}
             <header className="w-full flex items-center justify-start py-1 px-1 lg:px-2 mb-2 lg:mb-4 gap-3">
                 <Image
-                    src="/app-icon.png"
+                    src="/app-icon.webp"
                     alt="Brigo Icon"
                     width={40}
                     height={40}
@@ -93,7 +93,7 @@ export default function HomeClient() {
                     {/* Social Proof Badge */}
                     <div className="mb-0 lg:mb-0 -mt-2 lg:-mt-6">
                         <Image
-                            src="/1000-users.png"
+                            src="/1000-users.webp"
                             alt="4.8 Stars, 1,000+ students"
                             width={240}
                             height={150}
@@ -150,7 +150,7 @@ export default function HomeClient() {
                             className="transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[155px] lg:max-w-[180px]"
                         >
                             <Image
-                                src="/google-play-badge.png"
+                                src="/google-play-badge.webp"
                                 alt="Get it on Google Play"
                                 width={180}
                                 height={48}
@@ -219,7 +219,7 @@ export default function HomeClient() {
                 }}
             >
                 <Image
-                    src="/brigo-peeking.png"
+                    src="/brigo-peeking.webp"
                     alt="Brigo Mascot Peeking"
                     width={400}
                     height={266}
@@ -237,7 +237,7 @@ export default function HomeClient() {
                 }}
             >
                 <Image
-                    src="/brigo-peeking.png"
+                    src="/brigo-peeking.webp"
                     alt="Brigo Mascot Peeking"
                     width={400}
                     height={266}

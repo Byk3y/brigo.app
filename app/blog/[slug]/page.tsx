@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             authors: [post.author_name],
             images: [
                 {
-                    url: '/app-mockup.png', // Fallback for posts without images
+                    url: '/app-mockup.webp', // Fallback for posts without images
                     width: 1200,
                     height: 630,
                     alt: post.title,
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             card: 'summary_large_image',
             title: post.title,
             description: post.excerpt,
-            images: ['/app-mockup.png'],
+            images: ['/app-mockup.webp'],
         },
     };
 }
@@ -80,7 +80,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             "name": "Brigo",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://brigo.app/app-icon.png"
+                "url": "https://brigo.app/app-icon.webp"
             }
         }
     };
@@ -96,7 +96,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <header className="w-full flex items-center justify-between py-6 px-6 lg:px-12 bg-transparent sticky top-0 z-50">
                     <Link href="/blog" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                         <Image
-                            src="/app-icon.png"
+                            src="/app-icon.webp"
                             alt="Brigo Icon"
                             width={36}
                             height={36}

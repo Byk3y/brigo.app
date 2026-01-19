@@ -40,7 +40,7 @@ export default async function BlogPage() {
                 <header className="w-full flex items-center justify-start py-1 px-1 lg:px-2 mb-2 lg:mb-4 gap-3">
                     <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                         <Image
-                            src="/app-icon.png"
+                            src="/app-icon.webp"
                             alt="Brigo Icon"
                             width={40}
                             height={40}

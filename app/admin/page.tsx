@@ -261,7 +261,7 @@ function AdminPageContent() {
             <div className="min-h-screen bg-[#FFFCF4] flex items-center justify-center p-4 font-quicksand">
                 <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-black/5">
                     <div className="flex justify-center mb-6">
-                        <Image src="/app-icon.png" alt="Brigo" width={60} height={60} className="rounded-2xl" />
+                        <Image src="/app-icon.webp" alt="Brigo" width={60} height={60} className="rounded-xl" />
                     </div>
                     <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">Admin Access</h1>
                     <form onSubmit={handleLogin} className="space-y-4">
@@ -309,7 +309,7 @@ function AdminPageContent() {
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center justify-between w-full md:w-auto">
                         <div className="flex items-center gap-3">
-                            <Image src="/app-icon.png" alt="Brigo" width={32} height={32} className="rounded-xl" />
+                            <Image src="/app-icon.webp" alt="Brigo" width={32} height={32} className="rounded-xl" />
                             <span className="text-xl font-bold text-gray-900 tracking-tight">brigo admin</span>
                         </div>
 

@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/app-icon.png" },
-      { url: "/app-icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/app-icon.webp" },
+      { url: "/app-icon.webp", sizes: "32x32", type: "image/webp" },
     ],
     apple: [
-      { url: "/app-icon.png" },
+      { url: "/app-icon.webp" },
     ],
   },
   itunes: {
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: "Brigo - The AI Mobile Study App",
     description: "The all-in-one mobile AI study platform. Predict exams, generate podcasts, and study anywhere.",
     images: [{
-      url: "/app-mockup.png",
+      url: "/app-mockup.webp",
       width: 1200,
       height: 630,
       alt: "Brigo AI Mobile Study Companion"
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Brigo - The AI Mobile Study Companion",
     description: "Stop struggling. Start studying smarter on your phone. Predict exams and turn notes into podcasts.",
-    images: ["/app-mockup.png"],
+    images: ["/app-mockup.webp"],
     creator: "@brigoapp",
   },
 };
