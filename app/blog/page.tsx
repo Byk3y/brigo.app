@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import BlogSection from "@/components/sections/BlogSection";
-import { getPublishedPosts } from "@/lib/supabase-posts";
+import { getPostBySlug, getPublishedPosts } from "@/lib/supabase-posts";
+import { notFound } from "next/navigation";
+import { ArrowLeft, Clock, Calendar, User } from "lucide-react";
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
     title: "Blog - brigo | Insights on digital wellness",

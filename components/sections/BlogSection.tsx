@@ -64,7 +64,7 @@ export default function BlogSection({ posts }: { posts: Post[] }) {
                                     <div className="flex items-center gap-2 text-gray-500 text-sm md:text-base font-medium">
                                         <span>{post.date}</span>
                                         <span className="opacity-30">•</span>
-                                        <span>{post.read_time}</span>
+                                        <span>{post.read_time?.includes('min') ? post.read_time : `${post.read_time} min read`}</span>
                                         <span className="opacity-30">•</span>
                                         <span className="lowercase font-quicksand">by</span>
                                     </div>
