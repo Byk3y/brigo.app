@@ -198,15 +198,14 @@ export default function HomeClient() {
 
 
             {/* Footer */}
-            <footer className="w-full mt-24 py-12 text-center text-gray-400 text-[13px] font-bold uppercase tracking-[0.2em] border-t border-gray-100">
+            <footer className="w-full mt-24 py-12 text-center text-gray-600 text-[13px] font-bold uppercase tracking-[0.2em] border-t border-gray-100">
                 <div className="flex justify-center gap-6 mb-4">
                     <Link href="/blog" className="hover:text-black cursor-pointer transition-colors">Blog</Link>
                     <Link href="/privacy" className="hover:text-black cursor-pointer transition-colors">Privacy</Link>
                     <Link href="/terms" className="hover:text-black cursor-pointer transition-colors">Terms</Link>
-                    <span className="hover:text-black cursor-pointer transition-colors">Contact</span>
-                    <span className="hover:text-black cursor-pointer transition-colors">FAQ</span>
+                    <Link href="/support" className="hover:text-black cursor-pointer transition-colors">Support</Link>
                 </div>
-                <p>© 2025 Brigo. All rights reserved.</p>
+                <p>© 2026 Brigo. All rights reserved.</p>
             </footer>
 
             {/* Brigo Peeking Mascot - Top Right */}

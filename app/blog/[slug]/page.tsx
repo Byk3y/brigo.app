@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                     <Link
                         href="/blog"
-                        className="flex items-center gap-2 text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] hover:text-black transition-colors"
+                        className="flex items-center gap-2 text-[11px] font-bold text-gray-600 uppercase tracking-[0.2em] hover:text-black transition-colors"
                     >
                         <ArrowLeft className="w-3 h-3" />
                         Back to blog
@@ -147,7 +147,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </article>
 
                 {/* Simple Footer */}
-                <footer className="max-w-3xl mx-auto mt-24 px-6 py-12 border-t border-black/5 text-center text-gray-400 text-xs font-bold uppercase tracking-[0.2em]">
+                <footer className="max-w-3xl mx-auto mt-24 px-6 py-12 border-t border-black/5 text-center text-gray-600 text-xs font-bold uppercase tracking-[0.2em]">
                     <p>© {new Date().getFullYear()} Brigo. All rights reserved.</p>
                 </footer>
             </main>

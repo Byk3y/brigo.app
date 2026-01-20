@@ -25,8 +25,8 @@ export default function FeatureCard({
     return (
         <div
             className={cn(
-                "feature-card flex flex-col justify-between relative overflow-hidden group p-6 lg:p-8 transition-all duration-700 rounded-[2rem]",
-                isDark ? "bg-[#111827] text-white" : "bg-white text-gray-900 border border-black/[0.03] shadow-sm hover:shadow-xl hover:border-[#FF4D00]/10",
+                "feature-card flex flex-col justify-between relative overflow-hidden group p-6 lg:p-8 transition-all duration-500 rounded-[2rem] hover:-translate-y-2 hover:scale-[1.01]",
+                isDark ? "bg-[#111827] text-white shadow-2xl hover:shadow-[#FF4D00]/5" : "bg-white text-gray-900 border border-black/[0.04] shadow-sm hover:shadow-2xl hover:border-black/[0.08]",
                 className
             )}
         >
@@ -74,14 +74,6 @@ export default function FeatureCard({
                     />
                 </div>
             )}
-
-            {/* Background Glow */}
-            <div
-                className={cn(
-                    "absolute -right-24 -bottom-24 w-80 h-80 rounded-full blur-[100px] transition-all duration-1000 opacity-0 group-hover:opacity-100",
-                    isDark ? "bg-[#FF4D00]/30" : "bg-[#FF4D00]/15"
-                )}
-            />
 
             {children && (
                 <div className="relative z-20 mt-2">

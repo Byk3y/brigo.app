@@ -15,7 +15,7 @@ export default function PrivacyPage() {
                 <div className="mb-12">
                     <Link
                         href="/"
-                        className="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors"
+                        className="inline-flex items-center text-sm font-semibold text-gray-700 hover:text-gray-900 transition-colors"
                     >
                         <ChevronLeft className="w-4 h-4 mr-1" />
                         Back to home
