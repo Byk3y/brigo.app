@@ -307,7 +307,6 @@ function AdminPageContent() {
                         onUpdateTitle={(title, slug) => setEditingPost(prev => prev ? { ...prev, title, slug } : null)}
                         onUpdateSlug={(slug) => setEditingPost(prev => prev ? { ...prev, slug } : null)}
                         onUpdateExcerpt={(excerpt) => setEditingPost(prev => prev ? { ...prev, excerpt } : null)}
-                        onUpdateCoverImage={(url) => setEditingPost(prev => prev ? { ...prev, cover_image: url } : null)}
                         onTogglePublish={async () => {
                             if (!editingPost) return;
                             const isPublishing = !editingPost.published;
