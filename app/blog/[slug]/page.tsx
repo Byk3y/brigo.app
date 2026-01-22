@@ -5,6 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, User } from "lucide-react";
 
+function extractFirstImageUrl(content: string): string | null {
+    const match = content.match(/<img[^>]+src="([^">]+)"/);
+    return match ? match[1] : null;
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const post = await getPostBySlug(slug);
@@ -12,6 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     const baseUrl = 'https://brigo.app';
     const postUrl = `${baseUrl}/blog/${slug}`;
+
+    // 1. Check explicit cover image
+    // 2. Fallback to first image in content
+    // 3. Last fallback to generic mockup
+    const socialImage = post.cover_image || extractFirstImageUrl(post.content) || `${baseUrl}/app-mockup.webp`;
 
     return {
         title: post.title,
@@ -28,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             authors: [post.author_name],
             images: [
                 {
-                    url: '/app-mockup.webp', // Fallback for posts without images
+                    url: socialImage,
                     width: 1200,
                     height: 630,
                     alt: post.title,
@@ -39,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             card: 'summary_large_image',
             title: post.title,
             description: post.excerpt,
-            images: ['/app-mockup.webp'],
+            images: [socialImage],
         },
     };
 }

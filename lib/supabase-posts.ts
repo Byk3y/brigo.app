@@ -11,6 +11,7 @@ export interface Post {
     read_time: string;
     author_name: string;
     author_avatar: string;
+    cover_image?: string;
     published: boolean;
     created_at?: string;
 }

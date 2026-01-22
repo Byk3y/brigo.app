@@ -52,7 +52,8 @@ function AdminPageContent() {
             editingPost.content !== originalPost.content ||
             editingPost.title !== originalPost.title ||
             editingPost.excerpt !== originalPost.excerpt ||
-            editingPost.slug !== originalPost.slug
+            editingPost.slug !== originalPost.slug ||
+            editingPost.cover_image !== originalPost.cover_image
         );
     }, [editingPost, originalPost]);
 
@@ -306,6 +307,7 @@ function AdminPageContent() {
                         onUpdateTitle={(title, slug) => setEditingPost(prev => prev ? { ...prev, title, slug } : null)}
                         onUpdateSlug={(slug) => setEditingPost(prev => prev ? { ...prev, slug } : null)}
                         onUpdateExcerpt={(excerpt) => setEditingPost(prev => prev ? { ...prev, excerpt } : null)}
+                        onUpdateCoverImage={(url) => setEditingPost(prev => prev ? { ...prev, cover_image: url } : null)}
                         onTogglePublish={async () => {
                             if (!editingPost) return;
                             const isPublishing = !editingPost.published;

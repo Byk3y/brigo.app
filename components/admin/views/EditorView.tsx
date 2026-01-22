@@ -13,6 +13,7 @@ interface EditorViewProps {
     onUpdateTitle: (title: string, slug: string) => void;
     onUpdateSlug: (slug: string) => void;
     onUpdateExcerpt: (excerpt: string) => void;
+    onUpdateCoverImage: (url: string) => void;
     onTogglePublish: () => void;
     onUpdateContent: (content: string) => void;
     onUpdateStats: (stats: { readTime: number }) => void;
@@ -28,6 +29,7 @@ export default function EditorView({
     onUpdateTitle,
     onUpdateSlug,
     onUpdateExcerpt,
+    onUpdateCoverImage,
     onTogglePublish,
     onUpdateContent,
     onUpdateStats,
@@ -106,6 +108,24 @@ export default function EditorView({
                         <div className="w-full px-4 py-2 bg-gray-50 rounded-lg text-sm font-bold text-gray-700 border border-transparent">
                             {editingPost.read_time || '1'} min read
                         </div>
+                    </div>
+                </div>
+
+                <div className="mb-8">
+                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Cover Image URL</label>
+                    <div className="flex gap-4">
+                        <input
+                            type="text"
+                            value={editingPost.cover_image || ''}
+                            onChange={(e) => onUpdateCoverImage(e.target.value)}
+                            placeholder="https://supabase.co/storage/v1/object/public/..."
+                            className="flex-1 px-4 py-2 bg-gray-50 rounded-lg text-sm font-medium border border-transparent focus:border-gray-200 outline-none"
+                        />
+                        {editingPost.cover_image && (
+                            <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-gray-100">
+                                <img src={editingPost.cover_image} alt="Preview" className="w-full h-full object-cover" />
+                            </div>
+                        )}
                     </div>
                 </div>
 

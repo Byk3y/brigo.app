@@ -41,6 +41,11 @@ export default function EditorialListView({ posts, onNewPost, onEditPost, onDele
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sortedPosts.map((post) => (
                     <div key={post.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all group">
+                        {post.cover_image && (
+                            <div className="w-full h-40 overflow-hidden border-b border-gray-100">
+                                <img src={post.cover_image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                        )}
                         <div className="p-6">
                             <div className="flex justify-between items-start mb-4">
                                 <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${post.published ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}`}>
