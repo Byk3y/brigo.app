@@ -14,6 +14,7 @@ export interface Post {
     cover_image?: string;
     published: boolean;
     created_at?: string;
+    published_at?: string;
 }
 
 export async function getPublishedPosts() {
@@ -21,6 +22,7 @@ export async function getPublishedPosts() {
         .from('posts')
         .select('*')
         .eq('published', true)
+        .order('date', { ascending: false })
         .order('created_at', { ascending: false });
 
     if (error) {

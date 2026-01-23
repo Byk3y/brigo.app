@@ -6,7 +6,8 @@ import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, User } from "lucide-react";
 
 function extractFirstImageUrl(content: string): string | null {
-    const match = content.match(/<img[^>]+src="([^">]+)"/);
+    // Handle both normal quotes and escaped quotes (from Tiptap serialization)
+    const match = content.match(/<img[^>]+src=(?:\\\\)?["']?([^"'>\s\\]+)/);
     return match ? match[1] : null;
 }
 

@@ -13,6 +13,7 @@ interface EditorViewProps {
     onUpdateTitle: (title: string, slug: string) => void;
     onUpdateSlug: (slug: string) => void;
     onUpdateExcerpt: (excerpt: string) => void;
+    onUpdateDate: (date: string) => void;
     onTogglePublish: () => void;
     onUpdateContent: (content: string) => void;
     onUpdateStats: (stats: { readTime: number }) => void;
@@ -28,6 +29,7 @@ export default function EditorView({
     onUpdateTitle,
     onUpdateSlug,
     onUpdateExcerpt,
+    onUpdateDate,
     onTogglePublish,
     onUpdateContent,
     onUpdateStats,
@@ -91,14 +93,23 @@ export default function EditorView({
                     className="w-full text-4xl font-bold text-gray-900 outline-none mb-6 placeholder:text-gray-200"
                 />
 
-                <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-3 gap-4 mb-8">
                     <div>
                         <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Slug</label>
                         <input
                             type="text"
                             value={editingPost.slug || ''}
                             onChange={(e) => onUpdateSlug(e.target.value)}
-                            className="w-full px-4 py-2 bg-gray-50 rounded-lg text-sm font-medium border border-transparent focus:border-gray-200 outline-none"
+                            className="w-full px-4 py-2 bg-gray-50 rounded-lg text-sm font-medium border border-transparent focus:border-gray-200 outline-none transition-all"
+                        />
+                    </div>
+                    <div>
+                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Publish Date</label>
+                        <input
+                            type="date"
+                            value={editingPost.date || ''}
+                            onChange={(e) => onUpdateDate(e.target.value)}
+                            className="w-full px-4 py-2 bg-gray-50 rounded-lg text-sm font-medium border border-transparent focus:border-gray-200 outline-none transition-all"
                         />
                     </div>
                     <div>

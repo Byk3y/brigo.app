@@ -54,9 +54,14 @@ export default function BlogSection({ posts }: { posts: Post[] }) {
 
                 <div className="blog-grid space-y-6">
                     {posts.map((post, i) => {
-                        const displayDate = post.created_at
-                            ? new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-                            : post.date;
+                        // Parse YYYY-MM-DD date or fallback to string
+                        let displayDate = post.date;
+                        if (post.date && post.date.includes('-')) {
+                            const [year, month, day] = post.date.split('-').map(Number);
+                            const dateObj = new Date(year, month - 1, day);
+                            displayDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                        }
+
                         return (
                             <Link
                                 key={post.id || i}

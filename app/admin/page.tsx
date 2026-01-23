@@ -164,7 +164,7 @@ function AdminPageContent() {
 
     const handleNewPost = async () => {
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const dateStr = now.toISOString().split('T')[0]; // YYYY-MM-DD
         const newPost: Omit<Post, 'id' | 'created_at'> = {
             title: '',
             slug: `post-${Date.now()}`,
@@ -307,10 +307,24 @@ function AdminPageContent() {
                         onUpdateTitle={(title, slug) => setEditingPost(prev => prev ? { ...prev, title, slug } : null)}
                         onUpdateSlug={(slug) => setEditingPost(prev => prev ? { ...prev, slug } : null)}
                         onUpdateExcerpt={(excerpt) => setEditingPost(prev => prev ? { ...prev, excerpt } : null)}
+                        onUpdateDate={(date) => setEditingPost(prev => prev ? { ...prev, date } : null)}
                         onTogglePublish={async () => {
                             if (!editingPost) return;
                             const isPublishing = !editingPost.published;
-                            const updated = { ...editingPost, published: isPublishing };
+                            const now = new Date();
+                            const today = now.toISOString().split('T')[0];
+
+                            // Only set published_at and default date if it's the FIRST time publishing
+                            const isFirstTimePublishing = isPublishing && !editingPost.published_at;
+
+                            const updated = {
+                                ...editingPost,
+                                published: isPublishing,
+                                published_at: isFirstTimePublishing ? now.toISOString() : editingPost.published_at,
+                                // Only update the string date if it's the first time and hasn't been manually set by creation
+                                date: isFirstTimePublishing ? today : editingPost.date
+                            };
+
                             setEditingPost(updated);
                             try {
                                 setIsSaving(true);
