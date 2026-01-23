@@ -21,7 +21,7 @@ export async function getPublishedPosts() {
         .from('posts')
         .select('*')
         .eq('published', true)
-        .order('date', { ascending: false });
+        .order('created_at', { ascending: false });
 
     if (error) {
         console.error('Error fetching posts:', error);

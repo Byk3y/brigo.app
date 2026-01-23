@@ -18,6 +18,7 @@ interface Post {
     content: string;
     cover_image?: string;
     published?: boolean;
+    created_at?: string;
 }
 
 export default function BlogSection({ posts }: { posts: Post[] }) {
@@ -52,49 +53,54 @@ export default function BlogSection({ posts }: { posts: Post[] }) {
                 </div>
 
                 <div className="blog-grid space-y-6">
-                    {posts.map((post, i) => (
-                        <Link
-                            key={post.id || i}
-                            href={`/blog/${post.slug || '#'}`}
-                            className="blog-card block group bg-white rounded-2xl p-7 md:p-9 border border-black/5 shadow-[0_4px_20px_-1px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_-1px_rgba(0,0,0,0.04)] transition-all duration-500 cursor-pointer text-left"
-                        >
-                            <div>
-                                <h3 className="text-2xl md:text-3xl font-bold text-black mb-4 leading-tight font-quicksand group-hover:text-[#FF4D00] transition-colors duration-300">
-                                    {post.title}
-                                </h3>
+                    {posts.map((post, i) => {
+                        const displayDate = post.created_at
+                            ? new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                            : post.date;
+                        return (
+                            <Link
+                                key={post.id || i}
+                                href={`/blog/${post.slug || '#'}`}
+                                className="blog-card block group bg-white rounded-2xl p-7 md:p-9 border border-black/5 shadow-[0_4px_20px_-1px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_-1px_rgba(0,0,0,0.04)] transition-all duration-500 cursor-pointer text-left"
+                            >
+                                <div>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-black mb-4 leading-tight font-quicksand group-hover:text-[#FF4D00] transition-colors duration-300">
+                                        {post.title}
+                                    </h3>
 
-                                <div className="flex flex-wrap items-center gap-4 mb-4">
-                                    <div className="flex items-center gap-2 text-gray-500 text-sm md:text-base font-medium">
-                                        <span>{post.date}</span>
-                                        <span className="opacity-30">•</span>
-                                        <span>{post.read_time?.includes('min') ? post.read_time : `${post.read_time} min read`}</span>
-                                        <span className="opacity-30">•</span>
-                                        <span className="lowercase font-quicksand">by</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="relative w-7 h-7 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
-                                            <img
-                                                src={post.author_avatar}
-                                                alt={post.author_name}
-                                                className="w-full h-full object-cover"
-                                            />
+                                    <div className="flex flex-wrap items-center gap-4 mb-4">
+                                        <div className="flex items-center gap-2 text-gray-500 text-sm md:text-base font-medium">
+                                            <span>{displayDate}</span>
+                                            <span className="opacity-30">•</span>
+                                            <span>{post.read_time?.includes('min') ? post.read_time : `${post.read_time} min read`}</span>
+                                            <span className="opacity-30">•</span>
+                                            <span className="lowercase font-quicksand">by</span>
                                         </div>
-                                        <span className="text-gray-700 text-sm md:text-base font-medium font-quicksand">{post.author_name}</span>
+                                        <div className="flex items-center gap-2">
+                                            <div className="relative w-7 h-7 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+                                                <img
+                                                    src={post.author_avatar}
+                                                    alt={post.author_name}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            <span className="text-gray-700 text-sm md:text-base font-medium font-quicksand">{post.author_name}</span>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-gray-800 text-sm md:text-base leading-relaxed mb-4">
+                                        {post.excerpt}
+                                    </p>
+                                    <div className="group/link flex items-center gap-1 text-[#FF4D00] text-sm md:text-base font-semibold">
+                                        <span className="group-hover:underline decoration-1 underline-offset-4">
+                                            Read more
+                                        </span>
+                                        <span>→</span>
                                     </div>
                                 </div>
-
-                                <p className="text-gray-800 text-sm md:text-base leading-relaxed mb-4">
-                                    {post.excerpt}
-                                </p>
-                                <div className="group/link flex items-center gap-1 text-[#FF4D00] text-sm md:text-base font-semibold">
-                                    <span className="group-hover:underline decoration-1 underline-offset-4">
-                                        Read more
-                                    </span>
-                                    <span>→</span>
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </section>
