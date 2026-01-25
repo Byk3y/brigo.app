@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Brigo"
   },
   description: "Predict your exam questions, generate smart flashcards, and turn notes into podcasts. Brigo is the ultimate mobile AI study platform.",
-  keywords: ["AI study app", "mobile exam prediction", "study podcasts on the go", "AI flashcards", "smart study mobile app", "student productivity"],
+  keywords: ["AI exam prediction", "convert notes to podcast", "AI study companion", "smart flashcards generator", "mobile study app for students", "predicted exam questions", "active recall AI", "exam prep AI"],
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -65,6 +65,10 @@ export const metadata: Metadata = {
     images: ["/app-mockup.webp"],
     creator: "@brigoapp",
   },
+  verification: {
+    google: "c7Lw-quuCUPK_DWf79Yjmp1ukHkKBfsYmFH-fUWTYEA",
+    // bing: "REPLACE_WITH_BING_VERIFICATION_CODE",
+  },
 };
 
 export default function RootLayout({
@@ -74,17 +78,24 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "MobileApplication",
+    "@type": "SoftwareApplication",
     "name": "Brigo",
     "operatingSystem": "iOS, Android",
     "applicationCategory": "EducationApplication",
+    "description": "AI-powered mobile study platform that predicts exam questions, generates smart flashcards, and transforms notes into podcasts.",
+    "url": "https://brigo.app",
+    "logo": "https://brigo.app/app-icon.webp",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "installUrl": "https://brigo.app",
-    "description": "AI-powered mobile study platform that predicts exam questions, generates smart flashcards, and transforms notes into podcasts for students on the go.",
+    "featureList": [
+      "Exam Prediction",
+      "AI Flashcards",
+      "Notes to Podcasts",
+      "Smart Study Summaries"
+    ],
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",

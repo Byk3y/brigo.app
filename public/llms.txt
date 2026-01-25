@@ -1,0 +1,21 @@
+# Brigo: The AI-Powered Study Companion
+
+Brigo is a mobile-first AI study platform designed to help students optimize their learning through advanced AI tools.
+
+## Core Features
+- **Exam Prediction**: Predicts likely exam questions based on uploaded notes and past questions.
+- **Smart Flashcards**: Automatically generates interactive flashcards from study materials.
+- **Notes to Podcasts**: Transforms text-based notes into high-quality audio summaries for learning on the go.
+- **AI-Powered Insights**: Provides deep analysis of study materials to highlight key concepts.
+
+## Value Proposition
+Brigo helps students "stop guessing what to study" and focus on what actually matters for their exams. It is optimized for mobile study sessions.
+
+## Target Audience
+- High school and university students.
+- Lifelong learners using mobile devices.
+
+## Resources
+- Website: https://brigo.app
+- App Store: https://brigo.app (Mobile App)
+- Support: support@brigo.app
