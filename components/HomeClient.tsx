@@ -171,7 +171,10 @@ export default function HomeClient() {
                             >
                                 <Image
                                     src={src}
-                                    alt={`Brigo AI Study App Mockup - ${index === 0 ? 'Exam Prediction Interface' : 'Study Podcast Feature'}`}
+                                    alt={index === 0
+                                        ? "Brigo AI Exam Prediction Engine - Accuracy Forecasting Interface"
+                                        : "Brigo Study Podcasts - Multimodal Learning for Auditory Retention using Dual Coding Theory"
+                                    }
                                     width={1000}
                                     height={2023}
                                     className="w-full h-auto drop-shadow-2xl"
@@ -199,11 +202,18 @@ export default function HomeClient() {
 
             {/* Footer */}
             <footer className="w-full mt-24 py-12 text-center text-gray-600 text-[13px] font-bold uppercase tracking-[0.2em] border-t border-gray-100">
-                <div className="flex justify-center gap-6 mb-4">
+                <div className="flex justify-center gap-6 mb-8">
                     <Link href="/blog" className="hover:text-black cursor-pointer transition-colors">Blog</Link>
                     <Link href="/privacy" className="hover:text-black cursor-pointer transition-colors">Privacy</Link>
                     <Link href="/terms" className="hover:text-black cursor-pointer transition-colors">Terms</Link>
                     <Link href="/support" className="hover:text-black cursor-pointer transition-colors">Support</Link>
+                    <Link href="/science" className="hover:text-black cursor-pointer transition-colors">Science</Link>
+                </div>
+                <div className="mb-10 max-w-2xl mx-auto opacity-40 hover:opacity-100 transition-opacity">
+                    <p className="text-[10px] lowercase leading-relaxed mb-1">Built on peer-reviewed research in cognitive psychology:</p>
+                    <p className="text-[9px] italic lowercase leading-tight">
+                        dual coding theory (paivio, 1971) • the testing effect (roediger & karpicke, 2006) • cognitive load theory (sweller, 1988)
+                    </p>
                 </div>
                 <p>© 2026 Brigo. All rights reserved.</p>
             </footer>
