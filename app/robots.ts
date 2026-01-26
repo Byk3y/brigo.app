@@ -26,5 +26,6 @@ export default function robots(): MetadataRoute.Robots {
             }
         ],
         sitemap: 'https://brigo.app/sitemap.xml',
+        host: 'https://brigo.app',
     };
 }
