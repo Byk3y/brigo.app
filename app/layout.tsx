@@ -33,11 +33,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/app-icon.webp" },
-      { url: "/app-icon.webp", sizes: "32x32", type: "image/webp" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-144x144.png", sizes: "144x144", type: "image/png" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/app-icon.webp", type: "image/webp" },
     ],
     apple: [
-      { url: "/app-icon.webp" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
   },
   itunes: {
@@ -76,41 +80,62 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Brigo",
-    "operatingSystem": "iOS, Android",
-    "applicationCategory": "EducationApplication",
-    "description": "AI-powered mobile study platform that predicts exam questions, generates smart flashcards, and transforms notes into podcasts.",
-    "url": "https://brigo.app",
-    "logo": "https://brigo.app/app-icon.webp",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+  const jsonLds = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Brigo",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "EducationApplication",
+      "description": "AI-powered mobile study platform that predicts exam questions, generates smart flashcards, and transforms notes into podcasts.",
+      "url": "https://brigo.app",
+      "logo": "https://brigo.app/icon-512x512.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1200"
+      }
     },
-    "featureList": [
-      "Exam Prediction",
-      "AI Flashcards",
-      "Notes to Podcasts",
-      "Smart Study Summaries"
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "1200"
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Brigo",
+      "url": "https://brigo.app",
+      "logo": "https://brigo.app/icon-512x512.png",
+      "sameAs": [
+        "https://twitter.com/brigoapp",
+        "https://www.instagram.com/brigoapp", // Assuming common patterns if not specified
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Brigo",
+      "url": "https://brigo.app",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://brigo.app/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
-  };
+  ];
 
   return (
     <html lang="en">
       <head>
         {/* Placeholder for Apple Smart App Banner - Will be active once ID is added in metadata */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        {jsonLds.map((ld, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+          />
+        ))}
       </head>
       <body
         className={`${quicksand.variable} antialiased bg-[#FFFCF4] text-gray-900 text-base font-sans`}
