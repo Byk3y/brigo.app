@@ -6,9 +6,10 @@ import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import CharacterCount from '@tiptap/extension-character-count';
+import FileHandler from '@tiptap/extension-file-handler';
 import {
     Bold, Italic, List, ListOrdered, Quote, Heading2, Heading3,
-    Link as LinkIcon, Image as ImageIcon, Save, ArrowLeft, Loader2,
+    Link as LinkIcon, Image as ImageIcon, Loader2,
     Check, X
 } from 'lucide-react';
 import { uploadImage } from '@/lib/supabase-posts';
@@ -199,7 +200,7 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
     const [isFocused, setIsFocused] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
 
-    const processImageUpload = async (file: File, editorInstance: any) => {
+    const processImageUpload = async (file: File, editorInstance: any, position?: number) => {
         if (!file || isUploading) return;
 
         // 1. Create a local preview URL immediately
@@ -210,11 +211,17 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
 
         try {
             // 2. Insert the image with the local URL
-            editorInstance.chain()
-                .focus()
-                .setImage({ src: localUrl })
-                .updateAttributes('image', { 'data-loading': 'true' })
-                .run();
+            const command = editorInstance.chain().focus();
+            if (position !== undefined) {
+                command.insertContentAt(position, {
+                    type: 'image',
+                    attrs: { src: localUrl, 'data-loading': 'true' }
+                });
+            } else {
+                command.setImage({ src: localUrl })
+                    .updateAttributes('image', { 'data-loading': 'true' });
+            }
+            command.run();
 
             // 3. Upload to Supabase (optimization happens inside uploadImage)
             const publicUrl = await uploadImage(file);
@@ -285,6 +292,19 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
                     class: 'rounded-2xl mx-auto h-auto my-12 border border-black/5 shadow-2xl block transition-all duration-300 w-full md:max-w-[600px]',
                 },
             }),
+            FileHandler.configure({
+                allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
+                onDrop: (currentEditor, files, pos) => {
+                    files.forEach(file => {
+                        processImageUpload(file, currentEditor, pos);
+                    });
+                },
+                onPaste: (currentEditor, files) => {
+                    files.forEach(file => {
+                        processImageUpload(file, currentEditor);
+                    });
+                },
+            }),
             Placeholder.configure({
                 placeholder: 'Start writing your next insight...',
                 emptyEditorClass: 'is-editor-empty',
@@ -298,19 +318,6 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
         editorProps: {
             attributes: {
                 class: 'focus:outline-none',
-            },
-            handlePaste: (view, event) => {
-                const items = Array.from(event.clipboardData?.items || []);
-                const imageItem = items.find(item => item.type.startsWith('image'));
-
-                if (imageItem) {
-                    const file = imageItem.getAsFile();
-                    if (file) {
-                        processImageUpload(file, editor);
-                        return true; // Handle it
-                    }
-                }
-                return false;
             },
             transformPastedHTML(html) {
                 return html.replace(/<span style="[^"]*">/g, '<span>')
