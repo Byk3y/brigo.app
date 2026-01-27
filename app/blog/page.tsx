@@ -8,8 +8,8 @@ import { ArrowLeft, Clock, Calendar, User, ChevronLeft } from "lucide-react";
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-    title: "Blog - brigo | Insights on digital wellness",
-    description: "Insights on digital wellness and breaking free from endless scrolling",
+    title: "AI Study Tips & Exam Prep Guides | Brigo Blog",
+    description: "Master your courses with AI. Expert guides on exam prediction, active recall, and turning notes into study podcasts with Brigo.",
 };
 
 export default async function BlogPage() {

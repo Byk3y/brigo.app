@@ -171,6 +171,7 @@ export default function EditorView({
             </div>
 
             <Editor
+                key={editingPost.id}
                 initialContent={editingPost.content || ''}
                 onChange={onUpdateContent}
                 onStatsChange={onUpdateStats}

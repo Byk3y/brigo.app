@@ -27,6 +27,47 @@ export default function HomeClient() {
             const { isMobile } = context.conditions as { isMobile: boolean };
             const peekDist = isMobile ? 40 : 80;
 
+            // --- Phase 0: Entry Animation (Cinematic Reveal) ---
+            const entryTl = gsap.timeline({
+                defaults: { ease: "power3.out", duration: 1 }
+            });
+
+            entryTl
+                .from(".entry-header", {
+                    y: -20,
+                    opacity: 0,
+                    duration: 0.8
+                })
+                .from(".entry-badge", {
+                    scale: 0.8,
+                    opacity: 0,
+                    ease: "back.out(1.7)",
+                    duration: 0.8
+                }, "-=0.4")
+                .from(".entry-headline", {
+                    y: 30,
+                    opacity: 0,
+                    duration: 1
+                }, "-=0.6")
+                .from(".entry-subheadline", {
+                    y: 20,
+                    opacity: 0,
+                    duration: 1
+                }, "-=0.8")
+                .from(".entry-buttons", {
+                    y: 20,
+                    opacity: 0,
+                    stagger: 0.1,
+                    duration: 0.8
+                }, "-=0.8")
+                .from(".entry-mockup", {
+                    y: 60,
+                    opacity: 0,
+                    scale: 0.95,
+                    duration: 1.2
+                }, "-=1");
+
+            // --- Phase 1: Scroll Animations (Peeking Mascots) ---
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
@@ -70,7 +111,7 @@ export default function HomeClient() {
         <main className="min-h-screen bg-[#FFFCF4] flex flex-col items-center px-4 pt-3 lg:pt-4 overflow-x-hidden">
 
             {/* Header */}
-            <header className="w-full flex items-center justify-start py-1 px-1 lg:px-2 mb-2 lg:mb-4 gap-3">
+            <header className="entry-header w-full flex items-center justify-start py-1 px-1 lg:px-2 mb-2 lg:mb-4 gap-3">
                 <Image
                     src="/app-icon.webp"
                     alt="Brigo Icon"
@@ -91,7 +132,7 @@ export default function HomeClient() {
                 {/* Content Section (Heads-up) */}
                 <div className="w-full max-w-6xl mx-auto flex flex-col items-center px-4 -mt-2 lg:-mt-4">
                     {/* Social Proof Badge */}
-                    <div className="mb-0 lg:mb-0 -mt-2 lg:-mt-6">
+                    <div className="entry-badge mb-0 lg:mb-0 -mt-2 lg:-mt-6">
                         <Image
                             src="/1000-users.webp"
                             alt="4.8 Stars, 1,000+ students"
@@ -105,7 +146,7 @@ export default function HomeClient() {
                     {/* Headline */}
                     <div className="space-y-2 mb-6 lg:mb-10 w-full px-2 -mt-4 lg:-mt-8">
                         <h1
-                            className="text-black text-center whitespace-nowrap"
+                            className="entry-headline text-black text-center whitespace-nowrap"
                             style={{
                                 fontSize: 'clamp(38px, 10vw, 64px)',
                                 fontWeight: 700,
@@ -116,7 +157,7 @@ export default function HomeClient() {
                             Ace Every Exam
                         </h1>
                         <p
-                            className="text-[#FF4D00]"
+                            className="entry-subheadline text-[#FF4D00]"
                             style={{
                                 fontSize: 'clamp(18px, 4vw, 32px)',
                                 fontWeight: 600,
@@ -133,7 +174,7 @@ export default function HomeClient() {
                         {/* App Store Button */}
                         <a
                             href="#"
-                            className="transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[140px] lg:max-w-[160px]"
+                            className="entry-buttons transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[140px] lg:max-w-[160px]"
                         >
                             <Image
                                 src="/app-store-badge.webp"
@@ -147,7 +188,7 @@ export default function HomeClient() {
                         {/* Google Play Button */}
                         <a
                             href="#"
-                            className="transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[155px] lg:max-w-[180px]"
+                            className="entry-buttons transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[155px] lg:max-w-[180px]"
                         >
                             <Image
                                 src="/google-play-badge.webp"
@@ -161,7 +202,7 @@ export default function HomeClient() {
                 </div>
 
                 {/* App Mockups with Fade Transition */}
-                <div className="w-full flex justify-center px-4 -mt-2 lg:mt-0 relative z-30">
+                <div className="entry-mockup w-full flex justify-center px-4 -mt-2 lg:mt-0 relative z-30">
                     <div className="relative w-full max-w-[320px] lg:max-w-[310px] mb-10 lg:mb-20 transition-all duration-700">
                         {mockups.map((src, index) => (
                             <div

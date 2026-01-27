@@ -85,16 +85,26 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Brigo",
+      "alternateName": "Brigo App",
       "operatingSystem": "iOS, Android",
       "applicationCategory": "EducationApplication",
-      "description": "AI-powered mobile study platform that predicts exam questions, generates smart flashcards, and transforms notes into podcasts.",
+      "applicationSubCategory": "AI Study Assistant",
+      "description": "Brigo is the AI-powered study platform designed to help students turn learning materials into interactive study aids. It predicts exam questions, generates smart flashcards, and turns notes into podcasts.",
+      "disambiguatingDescription": "A specialized AI study companion and productivity platform for students, distinct from BIGO Live or other entertainment apps.",
       "url": "https://brigo.app",
-      "logo": "https://brigo.app/icon-512x512.png",
+      "logo": "https://brigo.app/app-icon.webp",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
       },
+      "featureList": [
+        "AI Exam Prediction Engine",
+        "Automated Smart Flashcard Generation",
+        "Lecture-to-Podcast Audio Conversion",
+        "Gamified Pet Companion Study Tracker"
+      ],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
@@ -126,7 +136,7 @@ export default function RootLayout({
   ];
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Placeholder for Apple Smart App Banner - Will be active once ID is added in metadata */}
         {jsonLds.map((ld, i) => (
@@ -139,6 +149,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${quicksand.variable} antialiased bg-[#FFFCF4] text-gray-900 text-base font-sans`}
+        suppressHydrationWarning
       >
         {children}
       </body>

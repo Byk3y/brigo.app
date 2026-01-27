@@ -1,6 +1,6 @@
 "use client";
 
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, Editor as TiptapEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
@@ -24,7 +24,7 @@ interface EditorProps {
     isSaving: boolean;
 }
 
-const MenuBar = ({ editor, onUpload, isUploading }: { editor: any, onUpload: (file: File) => Promise<void>, isUploading: boolean }) => {
+const MenuBar = ({ editor, onUpload, isUploading }: { editor: TiptapEditor | null, onUpload: (file: File) => Promise<void>, isUploading: boolean }) => {
     const [isLinkOpen, setIsLinkOpen] = useState(false);
     const [linkUrl, setLinkUrl] = useState('');
 
@@ -200,7 +200,7 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
     const [isFocused, setIsFocused] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
 
-    const processImageUpload = async (file: File, editorInstance: any, position?: number) => {
+    const processImageUpload = async (file: File, editorInstance: TiptapEditor, position?: number) => {
         if (!file || isUploading) return;
 
         // 1. Create a local preview URL immediately
@@ -229,7 +229,7 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
             // 4. Update the image src in the editor
             const doc = editorInstance.state.doc;
             let pos = -1;
-            doc.descendants((node: any, p: number) => {
+            doc.descendants((node, p) => {
                 if (node.type.name === 'image' && node.attrs.src === localUrl) {
                     pos = p;
                 }
@@ -252,7 +252,7 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
             // Cleanup on fix
             const doc = editorInstance.state.doc;
             let pos = -1;
-            doc.descendants((node: any, p: number) => {
+            doc.descendants((node, p) => {
                 if (node.type.name === 'image' && node.attrs.src === localUrl) {
                     pos = p;
                 }
@@ -341,7 +341,7 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
 
     return (
         <div className={`w-full bg-white rounded-xl border transition-all duration-300 shadow-sm overflow-hidden ${isFocused ? 'border-[#FF4D00] shadow-md shadow-[#FF4D00]/5' : 'border-gray-200'}`}>
-            <MenuBar editor={editor} onUpload={(file) => processImageUpload(file, editor)} isUploading={isUploading} />
+            <MenuBar editor={editor} onUpload={(file) => editor ? processImageUpload(file, editor) : Promise.resolve()} isUploading={isUploading} />
             <div className="p-5 min-h-[500px] prose prose-gray max-w-none 
                 prose-p:font-quicksand prose-p:text-gray-700
                 prose-headings:font-quicksand prose-headings:text-black blog-editor">

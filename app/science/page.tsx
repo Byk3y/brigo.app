@@ -31,7 +31,7 @@ export default function SciencePage() {
                 </h1>
 
                 <p className="text-xl text-gray-600 leading-relaxed mb-16">
-                    Brigo isn't just a study app; it's a cognitive performance system. Every feature—from podcasts to predictions—is engineered using validated research in educational psychology and neuroscience.
+                    Brigo isn&apos;t just a study app; it&apos;s a cognitive performance system. Every feature—from podcasts to predictions—is engineered using validated research in educational psychology and neuroscience.
                 </p>
 
                 <div className="space-y-20">
@@ -55,7 +55,7 @@ export default function SciencePage() {
 
                 <footer className="mt-32 pt-12 border-t border-gray-200 text-center">
                     <p className="text-gray-400 text-sm italic">
-                        "Optimizing the link between technology and the human brain."
+                        &quot;Optimizing the link between technology and the human brain.&quot;
                     </p>
                 </footer>
             </div>
