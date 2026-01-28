@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import TransformSection from "@/components/sections/TransformSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
+import WaitlistModal from "@/components/ui/WaitlistModal";
 
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,6 +13,7 @@ import { useGSAP } from "@gsap/react";
 export default function HomeClient() {
     const [activeMockup, setActiveMockup] = useState(0);
     const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+    const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
     const mockups = ["/app-mockup.webp", "/app-mockup-2.webp"];
     const peekingRightRef = useRef<HTMLDivElement>(null);
     const peekingLeftRef = useRef<HTMLDivElement>(null);
@@ -197,18 +199,18 @@ export default function HomeClient() {
                         </a>
 
                         {/* Google Play Button */}
-                        <a
-                            href="#"
-                            className="entry-buttons transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[155px] lg:max-w-[180px]"
+                        <button
+                            onClick={() => setIsWaitlistOpen(true)}
+                            className="entry-buttons transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[155px] lg:max-w-[180px] appearance-none"
                         >
                             <Image
                                 src="/google-play-badge.webp"
                                 alt="Get it on Google Play"
                                 width={180}
                                 height={48}
-                                className="h-10 lg:h-12 w-full lg:w-auto object-contain"
+                                className="h-10 lg:h-12 w-full lg:w-auto object-contain cursor-pointer"
                             />
-                        </a>
+                        </button>
                     </div>
                 </div>
 
@@ -328,6 +330,11 @@ export default function HomeClient() {
                     </div>
                 </a>
             </div>
+
+            <WaitlistModal
+                isOpen={isWaitlistOpen}
+                onClose={() => setIsWaitlistOpen(false)}
+            />
 
         </main >
     );
