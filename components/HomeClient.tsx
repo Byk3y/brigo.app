@@ -36,38 +36,44 @@ export default function HomeClient() {
             });
 
             entryTl
-                .from(".entry-header", {
-                    y: -20,
-                    opacity: 0,
-                    duration: 0.8
+                .to(".entry-header", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    startAt: { y: -20, opacity: 0 }
                 })
-                .from(".entry-badge", {
-                    scale: 0.8,
-                    opacity: 0,
+                .to(".entry-badge", {
+                    scale: 1,
+                    opacity: 1,
                     ease: "back.out(1.7)",
-                    duration: 0.8
+                    duration: 0.8,
+                    startAt: { scale: 0.8, opacity: 0 }
                 }, "-=0.4")
-                .from(".entry-headline", {
-                    y: 30,
-                    opacity: 0,
-                    duration: 1
+                .to(".entry-headline", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    startAt: { y: 30, opacity: 0 }
                 }, "-=0.6")
-                .from(".entry-subheadline", {
-                    y: 20,
-                    opacity: 0,
-                    duration: 1
+                .to(".entry-subheadline", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    startAt: { y: 20, opacity: 0 }
                 }, "-=0.8")
-                .from(".entry-buttons", {
-                    y: 20,
-                    opacity: 0,
+                .to(".entry-buttons", {
+                    y: 0,
+                    opacity: 1,
                     stagger: 0.1,
-                    duration: 0.8
+                    duration: 0.8,
+                    startAt: { y: 20, opacity: 0 }
                 }, "-=0.8")
-                .from(".entry-mockup", {
-                    y: 60,
-                    opacity: 0,
-                    scale: 0.95,
-                    duration: 1.2
+                .to(".entry-mockup", {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.2,
+                    startAt: { y: 60, opacity: 0, scale: 0.95 }
                 }, "-=1");
 
             // --- Phase 1: Scroll Animations (Peeking Mascots) ---

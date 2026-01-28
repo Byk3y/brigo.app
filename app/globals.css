@@ -107,6 +107,16 @@ body {
 }
 
 /* Utilities */
+.entry-header,
+.entry-badge,
+.entry-headline,
+.entry-subheadline,
+.entry-buttons,
+.entry-mockup {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
 .clip-text-image {
   background-clip: text;
   -webkit-background-clip: text;
