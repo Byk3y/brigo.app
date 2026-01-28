@@ -25,7 +25,7 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ['/admin'],
             }
         ],
-        sitemap: 'https://brigo.app/sitemap.xml',
-        host: 'https://brigo.app',
+        sitemap: 'https://www.brigo.app/sitemap.xml',
+        host: 'https://www.brigo.app',
     };
 }
