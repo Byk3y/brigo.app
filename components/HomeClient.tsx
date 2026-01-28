@@ -11,6 +11,7 @@ import { useGSAP } from "@gsap/react";
 
 export default function HomeClient() {
     const [activeMockup, setActiveMockup] = useState(0);
+    const [showFloatingCTA, setShowFloatingCTA] = useState(false);
     const mockups = ["/app-mockup.webp", "/app-mockup-2.webp"];
     const peekingRightRef = useRef<HTMLDivElement>(null);
     const peekingLeftRef = useRef<HTMLDivElement>(null);
@@ -101,6 +102,16 @@ export default function HomeClient() {
     });
 
     useEffect(() => {
+        const handleScroll = () => {
+            const scrollThreshold = 800; // Show after hero
+            setShowFloatingCTA(window.scrollY > scrollThreshold);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
         const timer = setInterval(() => {
             setActiveMockup((prev) => (prev + 1) % mockups.length);
         }, 4000); // Change image every 4 seconds
@@ -173,7 +184,7 @@ export default function HomeClient() {
                     <div className="flex flex-row items-center justify-center gap-2 lg:gap-3 mb-10 lg:mb-14 w-full lg:w-auto">
                         {/* App Store Button */}
                         <a
-                            href="#"
+                            href="https://apps.apple.com/us/app/brigo/id6757353722"
                             className="entry-buttons transition-transform hover:scale-105 active:scale-95 flex-1 lg:flex-none max-w-[140px] lg:max-w-[160px]"
                         >
                             <Image
@@ -295,6 +306,29 @@ export default function HomeClient() {
                 />
             </div>
 
-        </main>
+            {/* Floating CTA */}
+            <div
+                className={`fixed bottom-8 right-8 z-[200] transition-all duration-500 transform ${showFloatingCTA ? "translate-y-0 opacity-100 scale-100" : "translate-y-20 opacity-0 scale-90 pointer-events-none"
+                    }`}
+            >
+                <a
+                    href="https://apps.apple.com/us/app/brigo/id6757353722"
+                    className="flex items-center gap-3 bg-white/90 backdrop-blur-xl border border-black/5 px-4 py-3 rounded-2xl shadow-2xl hover:scale-105 active:scale-95 transition-all group"
+                >
+                    <Image
+                        src="/app-icon.webp"
+                        alt="Brigo"
+                        width={32}
+                        height={32}
+                        className="rounded-lg shadow-sm"
+                    />
+                    <div className="flex flex-col items-start pr-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF4D00]">Get brigo</span>
+                        <span className="text-xs font-bold text-gray-900">App Store</span>
+                    </div>
+                </a>
+            </div>
+
+        </main >
     );
 }

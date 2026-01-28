@@ -1,4 +1,14 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "The Science of Brigo | AI-Powered Learning & Cognitive Psychology",
+    description: "Discover the educational psychology and neuroscience behind Brigo. Based on Dual Coding Theory, Retrieval Practice, and Cognitive Load Theory.",
+    openGraph: {
+        title: "The Science of Brigo | AI-Powered Learning",
+        description: "How Brigo uses cognitive psychology to help you ace your exams.",
+    }
+};
 
 export default function SciencePage() {
     const frameworks = [
@@ -53,7 +63,29 @@ export default function SciencePage() {
                     ))}
                 </div>
 
-                <footer className="mt-32 pt-12 border-t border-gray-200 text-center">
+                <section className="mt-24 p-8 lg:p-12 bg-white rounded-[2.5rem] border border-black/5 shadow-xl shadow-orange-900/5 text-center">
+                    <h2 className="text-3xl font-bold mb-4">Put the Science into Practice.</h2>
+                    <p className="text-gray-600 mb-8 max-w-xl mx-auto">
+                        Don't just study. Optimize your brain's performance with the tools engineered for mastery.
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a
+                            href="https://apps.apple.com/us/app/brigo/id6757353722"
+                            className="transition-transform hover:scale-105 active:scale-95"
+                        >
+                            <img
+                                src="/app-store-badge.webp"
+                                alt="Download on the App Store"
+                                className="h-12 w-auto"
+                            />
+                        </a>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                            Available now on iOS
+                        </p>
+                    </div>
+                </section>
+
+                <footer className="mt-24 pt-12 border-t border-gray-200 text-center">
                     <p className="text-gray-400 text-sm italic">
                         &quot;Optimizing the link between technology and the human brain.&quot;
                     </p>

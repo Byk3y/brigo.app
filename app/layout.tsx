@@ -33,19 +33,22 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "48x48 96x96", type: "image/x-icon" },
       { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
       { url: "/icon-96x96.png", sizes: "96x96", type: "image/png" },
       { url: "/icon-144x144.png", sizes: "144x144", type: "image/png" },
       { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/app-icon.webp", type: "image/webp" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [
       { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
+    shortcut: [
+      { url: "/favicon.ico" },
+    ],
   },
   itunes: {
-    appId: 'REPLACE_WITH_APP_STORE_ID',
+    appId: '6757353722',
     appArgument: 'https://brigo.app',
   },
   openGraph: {
@@ -93,6 +96,8 @@ export default function RootLayout({
       "disambiguatingDescription": "A specialized AI study companion and productivity platform for students, distinct from BIGO Live or other entertainment apps.",
       "url": "https://brigo.app",
       "logo": "https://brigo.app/app-icon.webp",
+      "downloadUrl": "https://apps.apple.com/us/app/brigo/id6757353722",
+      "installUrl": "https://apps.apple.com/us/app/brigo/id6757353722",
       "offers": {
         "@type": "Offer",
         "price": "0",
