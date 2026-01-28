@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getPublishedPosts } from '@/lib/supabase-posts';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://www.brigo.app';
+    const baseUrl = 'https://brigo.app';
 
     // Static Routes
     const staticRoutes = [

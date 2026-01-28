@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.brigo.app"),
+  metadataBase: new URL("https://brigo.app"),
   title: {
     default: "Brigo - The AI-Powered Study Companion",
     template: "%s | Brigo"
@@ -49,12 +49,12 @@ export const metadata: Metadata = {
   },
   itunes: {
     appId: '6757353722',
-    appArgument: 'https://www.brigo.app',
+    appArgument: 'https://brigo.app',
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.brigo.app",
+    url: "https://brigo.app",
     siteName: "Brigo",
     title: "Brigo - The AI Mobile Study App",
     description: "The all-in-one mobile AI study platform. Predict exams, generate podcasts, and study anywhere.",
@@ -94,8 +94,8 @@ export default function RootLayout({
       "applicationSubCategory": "AI Study Assistant",
       "description": "Brigo is the AI-powered study platform designed to help students turn learning materials into interactive study aids. It predicts exam questions, generates smart flashcards, and turns notes into podcasts.",
       "disambiguatingDescription": "A specialized AI study companion and productivity platform for students, distinct from BIGO Live or other entertainment apps.",
-      "url": "https://www.brigo.app",
-      "logo": "https://www.brigo.app/app-icon.webp",
+      "url": "https://brigo.app",
+      "logo": "https://brigo.app/app-icon.webp",
       "downloadUrl": "https://apps.apple.com/us/app/brigo/id6757353722",
       "installUrl": "https://apps.apple.com/us/app/brigo/id6757353722",
       "offers": {
@@ -120,8 +120,8 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Brigo",
-      "url": "https://www.brigo.app",
-      "logo": "https://www.brigo.app/icon-512x512.png",
+      "url": "https://brigo.app",
+      "logo": "https://brigo.app/icon-512x512.png",
       "sameAs": [
         "https://twitter.com/brigoapp",
         "https://www.instagram.com/brigoapp", // Assuming common patterns if not specified
@@ -131,10 +131,10 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Brigo",
-      "url": "https://www.brigo.app",
+      "url": "https://brigo.app",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://www.brigo.app/search?q={search_term_string}",
+        "target": "https://brigo.app/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
