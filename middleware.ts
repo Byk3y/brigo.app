@@ -2,6 +2,15 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+    const url = request.nextUrl.clone()
+    const host = request.headers.get('host')
+
+    // 1. WWW to Non-WWW Redirect
+    if (host?.startsWith('www.')) {
+        url.host = host.replace('www.', '')
+        return NextResponse.redirect(url, 301)
+    }
+
     let response = NextResponse.next({
         request: {
             headers: request.headers,
@@ -54,20 +63,9 @@ export async function middleware(request: NextRequest) {
         }
     )
 
-    const { data: { session } } = await supabase.auth.getSession()
-
-    // Protected routes: /admin (except the logic handled in the page itself for login)
-    // Actually, we want to allow access to /admin if they are NOT logged in but ONLY to the login view.
-    // BUT the current /admin/page.tsx handles its own login state.
-    // To use middleware properly, we usually redirect unauthenticated users to /login.
-    // Since you have a single /admin page that switches between Login and Dashboard,
-    // we can still use middleware to refresh the session token so it doesn't expire.
-
-    if (!session && request.nextUrl.pathname.startsWith('/admin')) {
-        // If we want to strictly protect /admin and redirect to a separate login page, we'd do it here.
-        // However, since your login UI is INSIDE /admin/page.tsx, redirecting to /admin would cause a loop.
-        // So for now, we just ensure the session is updated in cookies.
-    }
+    // IMPORTANT: Only refresh session if we are not on a static asset or public file
+    // The matcher already handles most of this, but we can be explicit here if needed.
+    await supabase.auth.getSession()
 
     return response
 }

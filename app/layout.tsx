@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     template: "%s | Brigo"
   },
   description: "Predict your exam questions, generate smart flashcards, and turn notes into podcasts. Brigo is the ultimate mobile AI study platform.",
+  alternates: {
+    canonical: "https://brigo.app",
+  },
   keywords: ["AI study app", "mobile study app", "AI exam prediction", "convert notes to podcast", "AI study companion", "smart flashcards generator", "predicted exam questions", "active recall AI", "exam prep AI"],
   manifest: "/manifest.json",
   appleWebApp: {
