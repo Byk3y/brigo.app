@@ -10,8 +10,9 @@ import FileHandler from '@tiptap/extension-file-handler';
 import {
     Bold, Italic, List, ListOrdered, Quote, Heading2, Heading3,
     Link as LinkIcon, Image as ImageIcon, Loader2,
-    Check, X
+    Check, X, Youtube, Video
 } from 'lucide-react';
+import YoutubeExtension from '@tiptap/extension-youtube';
 import { uploadImage } from '@/lib/supabase-posts';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
@@ -27,6 +28,8 @@ interface EditorProps {
 const MenuBar = ({ editor, onUpload, isUploading }: { editor: TiptapEditor | null, onUpload: (file: File) => Promise<void>, isUploading: boolean }) => {
     const [isLinkOpen, setIsLinkOpen] = useState(false);
     const [linkUrl, setLinkUrl] = useState('');
+    const [isYoutubeOpen, setIsYoutubeOpen] = useState(false);
+    const [youtubeUrl, setYoutubeUrl] = useState('');
 
     if (!editor) return null;
 
@@ -50,21 +53,40 @@ const MenuBar = ({ editor, onUpload, isUploading }: { editor: TiptapEditor | nul
                 formattedUrl = `https://${formattedUrl}`;
             }
 
-            const { from, to } = editor.state.selection;
-            if (from === to) {
-                // If no selection, insert the URL as text and link it
-                editor.chain().focus().insertContent({
-                    type: 'text',
-                    text: linkUrl,
-                    marks: [{ type: 'link', attrs: { href: formattedUrl } }]
-                }).run();
+            const isYoutube = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/.test(formattedUrl);
+
+            if (isYoutube) {
+                editor.commands.setYoutubeVideo({
+                    src: formattedUrl,
+                });
             } else {
-                // If text is selected, link the selection
-                editor.chain().focus().extendMarkRange('link').setLink({ href: formattedUrl }).run();
+                const { from, to } = editor.state.selection;
+                if (from === to) {
+                    // If no selection, insert the URL as text and link it
+                    editor.chain().focus().insertContent({
+                        type: 'text',
+                        text: linkUrl,
+                        marks: [{ type: 'link', attrs: { href: formattedUrl } }]
+                    }).run();
+                } else {
+                    // If text is selected, link the selection
+                    editor.chain().focus().extendMarkRange('link').setLink({ href: formattedUrl }).run();
+                }
             }
         }
         setIsLinkOpen(false);
         setLinkUrl('');
+    };
+    const addYoutubeVideo = () => {
+        if (youtubeUrl) {
+            editor.commands.setYoutubeVideo({
+                src: youtubeUrl,
+                width: 640,
+                height: 480,
+            });
+            setIsYoutubeOpen(false);
+            setYoutubeUrl('');
+        }
     };
 
     const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,6 +164,13 @@ const MenuBar = ({ editor, onUpload, isUploading }: { editor: TiptapEditor | nul
                 {isUploading ? <Loader2 className="w-4 h-4 animate-spin text-[#FF4D00]" /> : <ImageIcon className="w-4 h-4" />}
                 <input type="file" className="hidden" accept="image/*" onChange={handleFileSelect} disabled={isUploading} />
             </label>
+            <button
+                onClick={() => setIsYoutubeOpen(true)}
+                className={`p-2 rounded hover:bg-gray-200 transition-colors ${isYoutubeOpen ? 'bg-gray-200 text-[#FF4D00]' : 'text-gray-600'}`}
+                title="Add YouTube Video"
+            >
+                <Youtube className="w-4 h-4" />
+            </button>
 
             {/* Premium Link Input Popover */}
             {isLinkOpen && (
@@ -166,6 +195,39 @@ const MenuBar = ({ editor, onUpload, isUploading }: { editor: TiptapEditor | nul
                     </button>
                     <button
                         onClick={() => setIsLinkOpen(false)}
+                        className="p-1.5 bg-gray-100 text-gray-500 rounded-lg hover:scale-105 transition-transform"
+                    >
+                        <X className="w-4 h-4" />
+                    </button>
+                </div>
+            )}
+
+            {/* YouTube Input Popover */}
+            {isYoutubeOpen && (
+                <div className="absolute top-full left-0 mt-2 p-3 bg-white border border-gray-200 shadow-xl rounded-2xl z-[60] flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
+                    <div className="bg-red-50 p-1.5 rounded-lg">
+                        <Youtube className="w-4 h-4 text-red-500" />
+                    </div>
+                    <input
+                        type="url"
+                        placeholder="Paste YouTube link..."
+                        className="px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-sm outline-none w-64 focus:border-red-500"
+                        value={youtubeUrl}
+                        onChange={(e) => setYoutubeUrl(e.target.value)}
+                        autoFocus
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') addYoutubeVideo();
+                            if (e.key === 'Escape') setIsYoutubeOpen(false);
+                        }}
+                    />
+                    <button
+                        onClick={addYoutubeVideo}
+                        className="p-1.5 bg-red-500 text-white rounded-lg hover:scale-105 transition-transform"
+                    >
+                        <Check className="w-4 h-4" />
+                    </button>
+                    <button
+                        onClick={() => setIsYoutubeOpen(false)}
                         className="p-1.5 bg-gray-100 text-gray-500 rounded-lg hover:scale-105 transition-transform"
                     >
                         <X className="w-4 h-4" />
@@ -269,6 +331,14 @@ export default function Editor({ initialContent, onChange, onStatsChange, onSave
 
     const editor = useEditor({
         extensions: [
+            YoutubeExtension.configure({
+                controls: true,
+                nocookie: true,
+                allowFullscreen: true,
+                HTMLAttributes: {
+                    class: 'rounded-2xl mx-auto h-auto my-12 border border-black/5 shadow-2xl block w-full aspect-video',
+                },
+            }),
             StarterKit.configure({
                 bulletList: {
                     keepMarks: true,

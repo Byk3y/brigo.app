@@ -172,6 +172,16 @@ body {
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1) !important;
 }
 
+.blog-editor .ProseMirror iframe {
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  max-width: 600px !important;
+  border-radius: 1.5rem !important;
+  margin: 3rem auto !important;
+  display: block !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1) !important;
+}
+
 /* Selected state - Vibrant orange border */
 .blog-editor .ProseMirror img.ProseMirror-selectednode {
   outline: 3px solid #FF4D00;
@@ -252,6 +262,17 @@ body {
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+/* Ensure iframes in prose are responsive and look good */
+.prose iframe {
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
 }
 
 .blog-editor .ProseMirror p.is-editor-empty:first-child::before {
