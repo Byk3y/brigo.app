@@ -66,6 +66,18 @@ export async function createPost(post: Omit<Post, 'id' | 'created_at'>) {
         .select();
 
     if (error) throw error;
+
+
+    // Trigger IndexNow if published
+    if (data[0]?.published && typeof window !== 'undefined') {
+        const url = `${window.location.origin}/blog/${data[0].slug}`;
+        fetch('/api/indexnow', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ urls: [url] })
+        }).catch(e => console.error('Failed to trigger IndexNow:', e));
+    }
+
     return data[0];
 }
 
@@ -77,6 +89,18 @@ export async function updatePost(id: string, post: Partial<Post>) {
         .select();
 
     if (error) throw error;
+
+
+    // Trigger IndexNow if published
+    if (data[0]?.published && typeof window !== 'undefined') {
+        const url = `${window.location.origin}/blog/${data[0].slug}`;
+        fetch('/api/indexnow', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ urls: [url] })
+        }).catch(e => console.error('Failed to trigger IndexNow:', e));
+    }
+
     return data[0];
 }
 
