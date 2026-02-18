@@ -1,7 +1,9 @@
 "use client";
 
-import { FileText, Globe, ImageIcon, Edit3, TrendingUp } from 'lucide-react';
+import { FileText, Globe, ImageIcon, Edit3, TrendingUp, RefreshCw, Loader2 } from 'lucide-react';
 import { Post } from '@/lib/supabase-posts';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface DashboardViewProps {
     posts: Post[];
@@ -12,6 +14,8 @@ interface DashboardViewProps {
 }
 
 export default function DashboardView({ posts, imagesCount, onNewPost, onEditPost, onViewAllPosts }: DashboardViewProps) {
+    const [isIndexing, setIsIndexing] = useState(false);
+
     const stats = [
         { label: 'Total Posts', value: posts.length, icon: FileText, color: 'text-blue-500', bg: 'bg-blue-50' },
         { label: 'Live Posts', value: posts.filter(p => p.published).length, icon: Globe, color: 'text-green-500', bg: 'bg-green-50' },
@@ -22,6 +26,40 @@ export default function DashboardView({ posts, imagesCount, onNewPost, onEditPos
     const urgentPosts = [...posts]
         .sort((a, b) => (a.published === b.published ? 0 : a.published ? 1 : -1))
         .slice(0, 5);
+
+    const handleIndexAll = async () => {
+        const livePosts = posts.filter(p => p.published);
+        if (livePosts.length === 0) {
+            toast.error("No live posts to index.");
+            return;
+        }
+
+        setIsIndexing(true);
+        const toastId = toast.loading("Submitting all posts to IndexNow...");
+
+        try {
+            const urls = livePosts.map(p => `${window.location.origin}/blog/${p.slug}`);
+
+            const response = await fetch('/api/indexnow', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ urls })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                toast.success(`Successfully submitted ${livePosts.length} posts!`, { id: toastId });
+            } else {
+                throw new Error(result.error || "Failed to index posts");
+            }
+        } catch (error: any) {
+            console.error("Indexing error:", error);
+            toast.error(error.message || "An error occurred", { id: toastId });
+        } finally {
+            setIsIndexing(false);
+        }
+    };
 
     return (
         <div className="max-w-5xl mx-auto">
@@ -79,7 +117,7 @@ export default function DashboardView({ posts, imagesCount, onNewPost, onEditPos
                 </div>
 
                 {/* Info Card */}
-                <div className="bg-[#FF4D00] rounded-2xl p-6 text-white relative overflow-hidden flex flex-col justify-between min-h-[240px]">
+                <div className="bg-[#FF4D00] rounded-2xl p-6 text-white relative overflow-hidden flex flex-col justify-between min-h-[300px]">
                     <div className="relative z-10">
                         <TrendingUp className="w-8 h-8 mb-4 opacity-50" />
                         <h2 className="text-xl font-bold mb-1">Content Strategy</h2>
@@ -87,12 +125,30 @@ export default function DashboardView({ posts, imagesCount, onNewPost, onEditPos
                             Your published posts are reaching users worldwide. Keep sharing insights to grow the Brigo community.
                         </p>
                     </div>
-                    <button
-                        onClick={onNewPost}
-                        className="bg-white text-[#FF4D00] font-bold py-2.5 px-6 rounded-full text-sm hover:scale-105 transition-all relative z-10 whitespace-nowrap"
-                    >
-                        Write New Post
-                    </button>
+
+                    <div className="space-y-3 relative z-10">
+                        <button
+                            onClick={onNewPost}
+                            className="w-full bg-white text-[#FF4D00] font-bold py-2.5 px-6 rounded-full text-sm hover:scale-[1.02] active:scale-95 transition-all whitespace-nowrap"
+                        >
+                            Write New Post
+                        </button>
+
+                        <button
+                            onClick={handleIndexAll}
+                            disabled={isIndexing}
+                            className="w-full bg-black/10 text-white font-bold py-2.5 px-6 rounded-full text-sm hover:bg-black/20 active:scale-95 transition-all flex items-center justify-center gap-2 border border-white/10"
+                            title="Send all live posts to IndexNow for immediate crawl"
+                        >
+                            {isIndexing ? (
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                            ) : (
+                                <RefreshCw className="w-4 h-4" />
+                            )}
+                            {isIndexing ? 'Indexing...' : 'Index All Posts'}
+                        </button>
+                    </div>
+
                     <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full" />
                 </div>
             </div>
