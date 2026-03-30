@@ -5,6 +5,9 @@ import { ChevronLeft } from "lucide-react";
 export const metadata = {
     title: "Privacy Policy - Brigo",
     description: "Privacy Policy for Brigo, the AI-powered study platform.",
+    alternates: {
+        canonical: "https://brigo.app/privacy",
+    },
 };
 
 export default function PrivacyPage() {

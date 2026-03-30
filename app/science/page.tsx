@@ -4,6 +4,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: "The Science of Brigo | AI-Powered Learning & Cognitive Psychology",
     description: "Discover the educational psychology and neuroscience behind Brigo. Based on Dual Coding Theory, Retrieval Practice, and Cognitive Load Theory.",
+    alternates: {
+        canonical: "https://brigo.app/science",
+    },
     openGraph: {
         title: "The Science of Brigo | AI-Powered Learning",
         description: "How Brigo uses cognitive psychology to help you ace your exams.",

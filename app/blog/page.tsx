@@ -10,6 +10,9 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
     title: "AI Study Tips & Exam Prep Guides | Brigo Blog",
     description: "Master your courses with AI. Expert guides on exam prediction, active recall, and turning notes into study podcasts with Brigo.",
+    alternates: {
+        canonical: "https://brigo.app/blog",
+    },
 };
 
 export default async function BlogPage() {

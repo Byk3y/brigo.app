@@ -5,6 +5,9 @@ import { ChevronLeft } from "lucide-react";
 export const metadata = {
     title: "Terms of Service - Brigo",
     description: "Terms of Service for Brigo, the AI-powered study platform.",
+    alternates: {
+        canonical: "https://brigo.app/terms",
+    },
 };
 
 export default function TermsPage() {
