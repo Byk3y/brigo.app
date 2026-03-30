@@ -72,10 +72,12 @@ export default async function BlogPage() {
                 <footer className="w-full py-12 text-center text-gray-600 text-[10px] font-bold uppercase tracking-[0.2em] border-t border-gray-100">
                     <div className="flex justify-center gap-6 mb-4">
                         <Link href="/" className="hover:text-black transition-colors">Home</Link>
-                        <span className="hover:text-black cursor-pointer transition-colors">Privacy</span>
-                        <span className="hover:text-black cursor-pointer transition-colors">Terms</span>
+                        <Link href="/support" className="hover:text-black transition-colors">Support</Link>
+                        <Link href="/science" className="hover:text-black transition-colors">Science</Link>
+                        <Link href="/privacy" className="hover:text-black transition-colors">Privacy</Link>
+                        <Link href="/terms" className="hover:text-black transition-colors">Terms</Link>
                     </div>
-                    <p>© 2026 Brigo. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Brigo. All rights reserved.</p>
                 </footer>
             </main>
         </>

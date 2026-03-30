@@ -64,11 +64,18 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const post = await getPostBySlug(slug);
+    const [post, allPosts] = await Promise.all([
+        getPostBySlug(slug),
+        getPublishedPosts(),
+    ]);
 
     if (!post) {
         notFound();
     }
+
+    const relatedPosts = allPosts
+        .filter((p) => p.slug !== slug)
+        .slice(0, 3);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -159,8 +166,45 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     />
                 </article>
 
-                {/* Simple Footer */}
+                {/* Related Posts */}
+                {relatedPosts.length > 0 && (
+                    <section className="max-w-3xl mx-auto mt-20 px-6">
+                        <h2 className="text-2xl md:text-3xl font-bold text-black mb-8 tracking-tight">
+                            Keep reading
+                        </h2>
+                        <div className="space-y-4">
+                            {relatedPosts.map((related) => (
+                                <Link
+                                    key={related.slug}
+                                    href={`/blog/${related.slug}`}
+                                    className="block group bg-white rounded-2xl p-6 md:p-7 border border-black/5 shadow-[0_4px_20px_-1px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_-1px_rgba(0,0,0,0.04)] transition-all duration-500"
+                                >
+                                    <h3 className="text-lg md:text-xl font-bold text-black mb-2 leading-tight group-hover:text-[#FF4D00] transition-colors duration-300">
+                                        {related.title}
+                                    </h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-2">
+                                        {related.excerpt}
+                                    </p>
+                                    <div className="flex items-center gap-2 text-gray-400 text-xs font-medium">
+                                        <span>{new Date(related.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                                        <span className="opacity-30">·</span>
+                                        <span>{related.read_time?.includes('min') ? related.read_time : `${related.read_time} min read`}</span>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* Footer */}
                 <footer className="max-w-3xl mx-auto mt-24 px-6 py-12 border-t border-black/5 text-center text-gray-600 text-xs font-bold uppercase tracking-[0.2em]">
+                    <div className="flex justify-center gap-6 mb-4">
+                        <Link href="/" className="hover:text-black transition-colors">Home</Link>
+                        <Link href="/blog" className="hover:text-black transition-colors">Blog</Link>
+                        <Link href="/support" className="hover:text-black transition-colors">Support</Link>
+                        <Link href="/privacy" className="hover:text-black transition-colors">Privacy</Link>
+                        <Link href="/terms" className="hover:text-black transition-colors">Terms</Link>
+                    </div>
                     <p>© {new Date().getFullYear()} Brigo. All rights reserved.</p>
                 </footer>
             </main>
