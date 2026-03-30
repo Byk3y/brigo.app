@@ -11,6 +11,12 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(url, 301)
     }
 
+    // 2. Remove trailing slashes (except root "/")
+    if (url.pathname !== '/' && url.pathname.endsWith('/')) {
+        url.pathname = url.pathname.replace(/\/+$/, '')
+        return NextResponse.redirect(url, 301)
+    }
+
     let response = NextResponse.next({
         request: {
             headers: request.headers,
@@ -79,6 +85,6 @@ export const config = {
          * - favicon.ico (favicon file)
          * Feel free to modify this pattern to include more paths.
          */
-        '/((?!_next/static|_next/image|favicon.ico).*)',
+        '/((?!_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.ico$|.*\\.svg$|.*\\.jpg$|.*\\.webp$|manifest\\.json$|robots\\.txt$|sitemap\\.xml$).*)',
     ],
 }
