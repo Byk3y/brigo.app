@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "A5Q4QPSUT9.com.brigo.ai",
+        "paths": ["/invite/*"]
+      }
+    ]
+  }
+}

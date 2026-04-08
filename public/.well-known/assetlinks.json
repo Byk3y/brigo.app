@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.brigo.ai",
+      "sha256_cert_fingerprints": ["CD:54:E7:F5:E5:02:AA:90:EB:8B:ED:CD:38:33:79:B1:81:59:C4:3C:51:65:57:97:3C:CD:81:73:51:FA:D2:7A"]
+    }
+  }
+]
