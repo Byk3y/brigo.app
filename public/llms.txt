@@ -1,46 +1,56 @@
-# Brigo — AI Study App, Flashcard Maker & Exam Predictor
+# Brigo
 
-> Brigo is an AI study app that helps students ace their exams. It predicts exam questions, generates smart flashcards, turns notes into podcasts, and gives you a 24/7 AI tutor. Available on iOS and coming soon to Android.
+> Brigo is an AI study app for college and professional-exam students. It predicts likely exam questions from your course materials, generates spaced-repetition flashcards, converts notes into audio podcasts, and includes a 24/7 AI tutor. Available on iOS; Android coming soon.
 
-## Features
+Brigo was built by solo developer Francis Chukwuma in January 2026, originally to help his nursing-student girlfriend Bridget prepare for the NCLEX. The app applies pattern recognition to past exams and course syllabi to surface high-probability questions, and uses dual coding and retrieval-practice methods from cognitive science to improve long-term retention.
 
-- **Exam Predictor**: AI predicts your likely exam questions with high accuracy based on your course material.
-- **Notes to Podcasts**: Turn your notes, PDFs, or YouTube links into audio summaries. Listen while you walk, gym, or commute.
-- **Smart Flashcards**: AI generates flashcards from your material. Uses spaced repetition so you never forget.
-- **Adaptive Quizzes**: Practice tests that adapt to your knowledge level. Find your weak spots fast.
-- **24/7 AI Tutor**: Get instant answers, explanations, and step-by-step guides anytime.
+## About
 
-## Who is Brigo for?
+- Type: Mobile application (iOS)
+- Category: Education / EdTech / Study tools
+- Audience: College and university students — nursing (NCLEX), pre-med (MCAT), engineering, and general exam prep
+- Platform: iOS (iPhone, iPad). Android coming soon.
+- Pricing: Free download; in-app subscription managed via Apple App Store
+- Founder: Francis Chukwuma
+- Launched: January 2026
+- Last Updated: 2026-04-12
 
-- University and college students preparing for exams
-- Students who want to study smarter, not harder
-- Auditory learners who prefer listening over reading
-- Anyone looking for AI-powered homework help and active recall tools
+## Core features
 
-## How it works
+- [Exam Predictor](https://brigo.app): Predicts likely exam questions from uploaded course materials and past exams
+- [Notes to Podcasts](https://brigo.app): Converts lecture notes, PDFs, or YouTube links into audio summaries
+- [Smart Flashcards](https://brigo.app): Auto-generates spaced-repetition flashcards from study materials
+- [Adaptive Quizzes](https://brigo.app): Practice tests that adjust difficulty based on knowledge gaps
+- [24/7 AI Tutor](https://brigo.app): On-demand explanations and step-by-step problem walkthroughs
 
-1. Upload your notes, slides, or paste a YouTube link
-2. Brigo's AI breaks it down into flashcards, quizzes, and audio summaries
-3. Study with spaced repetition and active recall to lock it in
-4. Use the exam predictor to focus on what matters most
+## Key pages
 
-## Keywords
+- [Homepage](https://brigo.app): Product overview and iOS download
+- [The Science of Brigo](https://brigo.app/science): Research basis — dual coding (Paivio), cognitive load (Sweller), retrieval practice (Roediger)
+- [Blog](https://brigo.app/blog): Study guides and exam-prep articles
+- [Support](https://brigo.app/support): Product help, troubleshooting, billing
 
-AI study app, flashcard maker, flashcard generator, exam prediction app, study app, notes to podcast, spaced repetition app, active recall, AI tutor, adaptive quiz, best study app, homework help, study tools, student productivity app, revision app, exam prep app
+## Top study guides
 
-## Top Study Resources (Blog)
+- [Quizlet vs Brigo: Honest Comparison for Students 2026](https://brigo.app/blog/quizlet-vs-brigo-honest-comparison-for-students-2026): Feature-by-feature comparison of Quizlet and Brigo
+- [AI Exam Prediction for Students: How It Works + 5 Best Tools 2026](https://brigo.app/blog/ai-exam-prediction-for-students-how-it-works-5-best-tools-2026): Explainer on AI-driven exam question prediction
+- [15 Best Study Apps for College Students 2026 (Tested & Ranked)](https://brigo.app/blog/15-best-study-apps-for-college-students-2026-tested-ranked): Ranked review of 15 study apps
+- [How to Study for Finals Week: The Complete Survival Guide 2026](https://brigo.app/blog/how-to-study-for-finals-week-the-complete-survival-guide-2026): Step-by-step finals prep
+- [Nursing School Study Guide: How to Pass NCLEX & Ace Exams 2026](https://brigo.app/blog/nursing-school-study-guide-how-to-pass-nclex-ace-exams-2026): NCLEX-focused study strategies
+- [AI-Enhanced Active Recall: Complete Student Guide 2026](https://brigo.app/blog/aienhanced-active-recall-complete-student-guide-2026): Active recall and spaced repetition methodology
 
-- [How to Study for Finals Week: Survival Guide](https://brigo.app/blog/how-to-study-for-finals-week-the-complete-survival-guide-2026)
-- [15 Best Study Apps for College Students (2026)](https://brigo.app/blog/15-best-study-apps-for-college-students-2026-tested-ranked)
-- [AI Exam Prediction for Students: How It Works](https://brigo.app/blog/ai-exam-prediction-for-students-how-it-works-5-best-tools-2026)
-- [Quizlet vs Brigo: Honest Comparison](https://brigo.app/blog/quizlet-vs-brigo-honest-comparison-for-students-2026)
-- [AI-Enhanced Active Recall Guide](https://brigo.app/blog/aienhanced-active-recall-complete-student-guide-2026)
-- [Flashcards for Nursing School: NCLEX Prep](https://brigo.app/blog/nursing-school-study-guide-how-to-pass-nclex-ace-exams-2026)
+## Optional
+
+- [Brigo Was Never Meant to Be an App](https://brigo.app/blog/brigo-was-never-meant-to-be-an-app): Founder origin story
+- [Introducing Brigo: AI Study App Now Available on iOS 2026](https://brigo.app/blog/introducing-brigo-ai-study-app-now-available-on-ios-2026): Launch announcement
+- [How to Use Brigo's Exam Prediction: Complete Student Guide 2026](https://brigo.app/blog/how-to-use-brigos-exam-prediction-complete-student-guide-2026): Product tutorial
+- [How to Study for a Test in One Day: Emergency Exam Prep Plan](https://brigo.app/blog/how-to-study-for-a-test-in-one-day-the-emergency-exam-prep-plan): Last-minute study tactics
+- [How to Study When You Have No Motivation: 7 Tricks That Actually Work 2026](https://brigo.app/blog/how-to-study-when-you-have-no-motivation-7-tricks-that-actually-work-2026): Motivation strategies
+- [I'm Failing My Class: A Student's Step-by-Step Recovery Plan](https://brigo.app/blog/im-failing-my-class-a-students-stepbystep-recovery-plan): Academic recovery guide
 
 ## Links
 
-- Website: https://brigo.app
 - App Store: https://apps.apple.com/us/app/brigo/id6757353722
-- Blog: https://brigo.app/blog
-- Science: https://brigo.app/science
+- Twitter/X: https://twitter.com/brigoapp
+- Instagram: https://instagram.com/brigoapp
 - Support: support@brigo.app
