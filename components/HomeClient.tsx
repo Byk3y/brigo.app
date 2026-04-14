@@ -268,6 +268,7 @@ export default function HomeClient() {
                     <Link href="/terms" className="hover:text-black cursor-pointer transition-colors">Terms</Link>
                     <Link href="/support" className="hover:text-black cursor-pointer transition-colors">Support</Link>
                     <Link href="/science" className="hover:text-black cursor-pointer transition-colors">Science</Link>
+                    <Link href="/delete-account" className="hover:text-black cursor-pointer transition-colors">Delete Account</Link>
                 </div>
                 <div className="mb-10 max-w-2xl mx-auto opacity-40 hover:opacity-100 transition-opacity">
                     <p className="text-[10px] lowercase leading-relaxed mb-1">Built on peer-reviewed research in cognitive psychology:</p>
