@@ -46,18 +46,18 @@ export default function EditorView({
 
     return (
         <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6 sm:mb-8">
                 <button
                     onClick={onBack}
-                    className="flex items-center gap-2 text-gray-500 hover:text-black transition-colors font-bold text-sm lg:text-base"
+                    className="flex items-center gap-2 text-gray-500 hover:text-black transition-colors font-bold text-sm lg:text-base self-start"
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    Back to Dashboard
+                    Back<span className="hidden sm:inline"> to Dashboard</span>
                 </button>
 
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
                     {editingPost.published && (
-                        <span className="text-gray-400 mr-2 italic lowercase font-medium">Staged Mode: Manual update required</span>
+                        <span className="hidden sm:inline text-gray-400 mr-2 italic lowercase font-medium">Staged Mode: Manual update required</span>
                     )}
                     {saveStatus === 'saving' && (
                         <span className="text-[#FF4D00] flex items-center gap-2">
@@ -77,7 +77,7 @@ export default function EditorView({
                 </div>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm mb-6">
+            <div className="bg-white p-5 sm:p-8 rounded-3xl border border-gray-100 shadow-sm mb-6">
                 <input
                     type="text"
                     value={editingPost.title || ''}
@@ -90,10 +90,10 @@ export default function EditorView({
                         onUpdateTitle(newTitle, newSlug);
                     }}
                     placeholder="Post Title"
-                    className="w-full text-4xl font-bold text-gray-900 outline-none mb-6 placeholder:text-gray-200"
+                    className="w-full text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 outline-none mb-6 placeholder:text-gray-200"
                 />
 
-                <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                     <div>
                         <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">Slug</label>
                         <input
@@ -132,17 +132,17 @@ export default function EditorView({
                         onChange={(e) => onUpdateExcerpt(e.target.value)}
                         rows={3}
                         maxLength={160}
-                        className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm font-medium border border-transparent focus:border-gray-200 outline-none resize-none"
+                        className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm font-medium border border-transparent focus:border-gray-200 outline-none resize-none min-h-[140px] sm:min-h-0"
                         placeholder="Write a catchy 160-character summary for Google and your blog cards..."
                     />
                 </div>
 
-                <div className="flex items-center justify-between py-4 border-t border-gray-50">
-                    <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4 border-t border-gray-50">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                         <button
                             onClick={onTogglePublish}
                             disabled={isSaving}
-                            className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 shadow-sm ${editingPost.published ? 'bg-gray-100 text-gray-600 hover:bg-gray-200' : 'bg-[#FF4D00] text-white hover:scale-105 shadow-lg shadow-[#FF4D00]/20'}`}
+                            className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 shadow-sm w-full sm:w-auto ${editingPost.published ? 'bg-gray-100 text-gray-600 hover:bg-gray-200' : 'bg-[#FF4D00] text-white hover:scale-105 shadow-lg shadow-[#FF4D00]/20'}`}
                         >
                             {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Globe className="w-4 h-4" />}
                             {editingPost.published ? 'Take Offline (Draft)' : 'Go Live (Publish)'}
@@ -161,7 +161,7 @@ export default function EditorView({
                         <button
                             onClick={() => onSave()}
                             disabled={isSaving}
-                            className="flex items-center gap-2 bg-[#FF4D00] text-white px-8 py-3 rounded-xl font-bold hover:scale-105 transition-all shadow-xl shadow-[#FF4D00]/20 animate-in fade-in slide-in-from-right-4"
+                            className="flex items-center justify-center gap-2 bg-[#FF4D00] text-white px-8 py-3 rounded-xl font-bold hover:scale-105 transition-all shadow-xl shadow-[#FF4D00]/20 animate-in fade-in slide-in-from-right-4 w-full sm:w-auto"
                         >
                             {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <SaveIcon className="w-4 h-4" />}
                             Update Live Post
